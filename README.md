@@ -1,13 +1,13 @@
 # PVP
 
+Documentation, scripts and data for pathogenic variant prediction modeling.
+
 ## CADD
 
 Data and documentation sources:
   * [A general framework for estimating the relative pathogenicity of human genetic variants.](http://www.ncbi.nlm.nih.gov/pubmed/24487276)
   * Publication [website](cadd.gs.washington.edu)
   * Data storage website [here](http://krishna.gs.washington.edu/download/CADD/) and [here](http://krishna.gs.washington.edu/members/mkircher/download/CADD/).
-
-
 
 ## DANN
 
@@ -56,7 +56,7 @@ The github page has a nice README on it to go over the models and how to run the
   3. clinvar_CADD.tsv.gz
   4. clinvar_imputed.csv
   5. ESP6500.vcf.gz
-  6. ESP6500S1.V2.MAF5.anno_all.tsv.gz
+  6. ESP6500SI.V2.MAF5.anno_all.tsv.gz
   7. ESP6500_CADD.tsv.gz
   8. ESP6500_imputed.csv
   9. impute2csv_mod.py
@@ -84,12 +84,12 @@ This is great; however, it is still unclear as to where the two initial files or
 | clinvar_CADD.tsv.gz | 29317 | 90 | 15193 | 2 |
 | clinvar_imputed.csv | 29316 | 950 | 15193 | 1 |
 | ESP6500.vcf.gz | 34608 | 5 | 18852 | 0 |
-| ESP6500S1.V2.MAF5.anno_all.tsv.gz | 34610 | 90 | 18852 | 2 |
+| ESP6500SI.V2.MAF5.anno_all.tsv.gz | 34610 | 90 | 18852 | 2 |
 | ESP6500_CADD.tsv.gz | 32093 | 90 | 18852 | 2 |
 | ESP6500_imputed.csv | 32092 | 950 | 18852 | 1 |
 
 If you recall the dataset that was available on the publication website in numpy / scipy format had a dimension of 61406 x 949, which appears to align exactly with the clinvar_imputed.csv and ESP6500_imputed.csv datasets together (29315 + 32091 = 61406 rows and 950 - 1 (target variable) = 949 feature columns). A couple of hanging questions that come out of looking at these files:
-  1. Why does the number from the original files (clinvar_20140303_pathogenic.anno_all.tsv.gz and ESP6500S1.V2.MAF5.anno_all.tsv.gz) reduce after going through the CADD annotation process?
+  1. Why does the number from the original files (clinvar_20140303_pathogenic.anno_all.tsv.gz and ESP6500SI.V2.MAF5.anno_all.tsv.gz) reduce after going through the CADD annotation process?
     * I don't know off hand, but I suspect the particular variant, meaning the reference-alternate allele combination at a particular position is not in the CADD dataset.
   2. Are the pathogenic variants in the ClinVar file curated by reviewer status at all, and are the ESP benign variants matched by allele frequency or consequence?
   3. Why are there so many duplicate genomic positions in the files?
