@@ -12,23 +12,62 @@ Data and documentation sources:
   * Publication [website](https://cbcl.ics.uci.edu/public_data/DANN/).
   * Github [website](https://github.com/uci-cbcl/DeepCADD)
 
+# Publication website datasets
+
 After reading the DANN paper and analyzing the publication website it was still unclear as to whether the data used for the reported analysis for available for use in either of the identified data sources. I will try to lay out all the convolutions and my conclusions to moving forward. First, the DANN publication cites the use of 10,000 pathogenic and benign variants each for their ROC curve. The publication website contains multiple datasets from the publication:
   1. testing.X.npz, testing.svmlight.gz, testing.y.npy
   2. training.X.npz, training.svmlight.gz, training.y.npy
   3. validation.X.npz, validation.svmlight.gz, validation.y.npy
   4. ClinVar_ESP.X.npz, ClinVar_ESP.svmlight.gz, ClinVar_ESP.y.npy
 
-These four datasets are stored in numpy / scipy formats (.npz and .npy) and a custom svmlight gzip format. Hopefully the naming of these four datasets indicate their purpose. Unfortunately, the numpy / scipy formats are not easily readable without first loading them in python and then rewriting them into a data matrix or tab-delimited format. There is code in the other directories on the publication website to quickly load these datasets. In python (assuming the data are stored in the same directory):
+These four datasets are stored in numpy / scipy formats (.npz and .npy) and a custom svmlight gzip format. Hopefully the naming of these four datasets indicate their purpose. Unfortunately, the numpy / scipy formats are not easily readable without first loading them in python and then rewriting them into a data matrix or tab-delimited format. There is code in the other directories on the publication website to quickly load these datasets. I will review the ClinVar and ESP data, since that is of interest at the moment. In python (assuming the data are stored in the same directory):
 
 ```
 import numpy
 import scipy.sparse
 
+# Load the feature set
 X_ClinVar_ESP = numpy.load('ClinVar_ESP.X.npz')  
 X_ClinVar_ESP = scipy.sparse.csr_matrix((X_ClinVar_ESP['data'], X_ClinVar_ESP['indices'], X_ClinVar_ESP['indptr']), shape=X_ClinVar_ESP['shape'])
+
+# Load the binary response / target data.
 y_ClinVar_ESP = numpy.load('ClinVar_ESP.y.npy')
+
+# Expand sparse matrix into a dense matrix to identify shape
+xDense = X_ClinVar_ESP.dense
+
+# Show matrix dimensions - it should be (61406, 949)
+xDense.shape 
 ```
 
+After loading the numpy datasets in python, it is clear that the number of features (n=949) matches the number reported from the CADD paper (after expanding the categorical variables and imputing - see above). The number of rows in the matrix is a bit confusing since you would expect 20,000 rows as cited by the paper from their analysis (n_clinvar = 10,000 and n_esp = 10,000). Since the data had been encoded in numpy format there is not meta-information, like a header, for these datasets, and the data has been expanded into numerical values for input into the model already. To try to resolve what exactly was in this dataset, I sought to compare it to the data available on the github website.
+
+# Github website datasets
+
+The github page has a nice README on it to go over the models and how to run the code with the datasets. However, the finer details of the origins of the ClinVar and ESP datasets were a bit lost. First there is a Testing directory which contains ESP and ClinVar dataset files, but there is also a Jul2 directory that contains the same ClinVar and ESP dataset files and some imputation scripts. The files available are:
+  1. clinvar.vcf.gz
+  2. clinvar_20140303_pathogenic.anno_all.tsv.gz
+  3. clinvar_CADD.tsv.gz
+  4. clinvar_imputed.csv
+  5. ESP6500.vcf.gz
+  6. ESP6500S1.V2.MAF5.anno_all.tsv.gz
+  7. ESP6500_CADD.tsv.gz
+  8. ESP6500_imputed.csv
+  9. impute2csv_mod.py
+  10. impute_mod.py
+
+According the README in the DeepCADD directory here is how the datasets were formatted:
+
+> After constantly e-mailing the original CADD authors, they finally gave me some scripts to convert the output from their CADD online service into the proper format. All files are in the Testing/Jul2 folder. The svmlight file you need for testing is Jul2_testing.svmlight. Below are all the command lines I used to generate the file in case you want to follow:
+>
+> ```
+> awk '{print $1"\t"$2"\t.\t"$3"\t"$5}' ESP6500SI.V2.MAF5.anno_all.tsv > ESP6500.vcf
+> awk '{print $1"\t"$2"\t.\t"$3"\t"$5}' clinvar_20140303_pathogenic.anno_all.tsv > clinvar.vcf
+> #submitted both vcf files to the CADD online service to get _CADD.tsv files
+> cat clinvar_CADD.tsv | python impute_mod.py | python impute2csv_mod.py > clinvar_imputed.csv
+> cat ESP6500_CADD.tsv | python impute_mod.py | python impute2csv_mod.py > ESP6500_imputed.csv
+> python csv2svmlight.py  
+> ```
 Data sets:
   * CADD
     * Testing and training - 
