@@ -76,11 +76,21 @@ This is great; however, it is still unclear as to where the two initial files or
 | clinvar.vcf.gz | 29477 | 5  | 15202 | 0 |
 | clinvar_20140303_pathogenic.anno_all.tsv.gz | 29479 | 90 | 15202 | 2 |
 | clinvar_CADD.tsv.gz | 29317 | 90 | 15193 | 2 |
-| clinvar_imputed.csv | 29316 | 950 | 15193 | 0 |
+| clinvar_imputed.csv | 29316 | 950 | 15193 | 1 |
 | ESP6500.vcf.gz | 34608 | 5 | 18852 | 0 |
 | ESP6500S1.V2.MAF5.anno_all.tsv.gz | 34610 | 90 | 18852 | 2 |
 | ESP6500_CADD.tsv.gz | 32093 | 90 | 18852 | 2 |
 | ESP6500_imputed.csv | 32092 | 950 | 18852 | 1 |
+
+If you recall the dataset that was available on the publication website in numpy / scipy format had a dimension of 61406 x 949, which appears to align exactly with the clinvar_imputed.csv and ESP6500_imputed.csv datasets together (29315 + 32091 = 61406 rows and 950 - 1 (target variable) = 949 feature columns). A couple of hanging questions that come out of looking at these files:
+  1. Why does the number from the original files (clinvar_20140303_pathogenic.anno_all.tsv.gz and ESP6500S1.V2.MAF5.anno_all.tsv.gz) reduce after going through the CADD annotation process?
+    * I don't know off hand, but I suspect the particular variant, meaning the reference-alternate allele combination at a particular position is not in the CADD dataset.
+  2. Why are there so many duplicate genomic positions in the files?
+    * This was not readily apparent after looking at the available files and the CADD online service that supposedly generated the annotations. First, the CADD online scoring service will only report a single line of annotation and score for any given position that is input. In the Information section of the [website](http://cadd.gs.washington.edu/info) it states:
+> Given a set of variants, we use Ensembl Variant Effect Predictor (VEP) on the set of variants to obtain the gene model based predictions. We run VEP with the --per_gene option, which will return a "representative" transcript with the most severe effect for a certain gene. If a position overlaps multiple genes, it will return multiple annotations for this variant.
+
+  Given this information, there should only be multiple lines for a single variant position if it lands in multiple genes, which is not the case for a majority of the duplicate entries in the files provided on the DANN github website. The only resolution that makes sense is that the raw data files provided by the CADD authors on their [download page](http://cadd.gs.washington.edu/download) were used to extract these variant annotations, since these files contain multiple entries for many genomic positions. This also begs the question whether the CADD and DANN authors used the multi-annotation per variant position files for their model testing or collapsed them down to a single entry per variant position. Based on communication with the DANN first author, Daniel Quanq, the files provided were the data used in the analysis from the paper and 10,000 were sampled from the ClinVar and 10,000 sampled from ESP datasets.
+
 
 Data sets:
   * CADD
