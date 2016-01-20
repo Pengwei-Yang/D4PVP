@@ -20,12 +20,14 @@ After reading the DANN paper and analyzing the publication website it was still 
 
 These four datasets are stored in numpy / scipy formats (.npz and .npy) and a custom svmlight gzip format. Hopefully the naming of these four datasets indicate their purpose. Unfortunately, the numpy / scipy formats are not easily readable without first loading them in python and then rewriting them into a data matrix or tab-delimited format. There is code in the other directories on the publication website to quickly load these datasets. In python (assuming the data are stored in the same directory):
 
-`import numpy
+```
+import numpy
 import scipy.sparse
 
 X_ClinVar_ESP = numpy.load('ClinVar_ESP.X.npz')  
 X_ClinVar_ESP = scipy.sparse.csr_matrix((X_ClinVar_ESP['data'], X_ClinVar_ESP['indices'], X_ClinVar_ESP['indptr']), shape=X_ClinVar_ESP['shape'])
-y_ClinVar_ESP = numpy.load('ClinVar_ESP.y.npy')`
+y_ClinVar_ESP = numpy.load('ClinVar_ESP.y.npy')
+```
 
 Data sets:
   * CADD
