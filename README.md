@@ -30,7 +30,7 @@ import scipy.sparse
 X_ClinVar_ESP = numpy.load('ClinVar_ESP.X.npz')  
 X_ClinVar_ESP = scipy.sparse.csr_matrix((X_ClinVar_ESP['data'], X_ClinVar_ESP['indices'], X_ClinVar_ESP['indptr']), shape=X_ClinVar_ESP['shape'])
 
-### Load the binary response / target data.
+# Load the binary response / target data.
 y_ClinVar_ESP = numpy.load('ClinVar_ESP.y.npy')
 
 # Expand sparse matrix into a dense matrix to identify shape
@@ -42,7 +42,7 @@ xDense.shape
 
 After loading the numpy datasets in python, it is clear that the number of features (n=949) matches the number reported from the CADD paper (after expanding the categorical variables and imputing - see above). The number of rows in the matrix is a bit confusing since you would expect 20,000 rows as cited by the paper from their analysis (n_clinvar = 10,000 and n_esp = 10,000). Since the data had been encoded in numpy format there is not meta-information, like a header, for these datasets, and the data has been expanded into numerical values for input into the model already. To try to resolve what exactly was in this dataset, I sought to compare it to the data available on the github website.
 
-# Github website datasets
+### Github website datasets
 
 The github page has a nice README on it to go over the models and how to run the code with the datasets. However, the finer details of the origins of the ClinVar and ESP datasets were a bit lost. First there is a Testing directory which contains ESP and ClinVar dataset files, but there is also a Jul2 directory that contains the same ClinVar and ESP dataset files and some imputation scripts. The files available are:
   1. clinvar.vcf.gz
@@ -70,25 +70,17 @@ According the README in the DeepCADD directory here is how the datasets were for
 > ```
 
 This is great; however, it is still unclear as to where the two initial files originated (ESP6500SI.V2.MAF5.anno_all.tsv and clinvar_20140303_pathogenic.anno_all.tsv), and is further confused by the fact that these files contain the same columns as the "annotated CADD" files (clinvar_CADD.tsv and ESP6500_CADD.tsv). It seems likely that these two initial files were originally pulled from the CADD data files in some manner that is not fully documented. Nonethless, when you look at the contents of the .tsv files here is the summary:
-  1. clinvar.vcf.gz - 29477 rows with 15202 unique genomic positions (no header) 
-  2. clinvar_20140303_pathogenic.anno_all.tsv.gz - 29479 rows with 15202 unique genomic positions (two header rows)
-  3. clinvar_CADD.tsv.gz - 29317 rows with 15193 unique genomic positions (two header rows)
-  4. clinvar_imputed.csv - 29316 rows with 15193 unique genomic positions (one header row)
-  5. ESP6500.vcf.gz - 34608 rows with 18852 unique genomic positions (no header)
-  6. ESP6500S1.V2.MAF5.anno_all.tsv.gz - 34610 rows with 18852 unique genomic positions (two header rows)
-  7. ESP6500_CADD.tsv.gz - 32093 rows with 18852 unique genomic positions (two header rows)
-  8. ESP6500_imputed.csv - 32092 rows with 18852 unique genomic positions (one header row)
 
-|file name   | Number of rows   | Number of columns   | Number of unique genomic positions   | Number of header rows   |
+| File name | Number of rows | Number of columns   | Number of unique genomic positions   | Number of header rows   |
 |---|---|---|---|---|
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
+| clinvar.vcf.gz | 29477 | 5  | 15202 | 0 |
+| clinvar_20140303_pathogenic.anno_all.tsv.gz | 29479 | 90 | 15202 | 2 |
+| clinvar_CADD.tsv.gz | 29317 | 90 | 15193 | 2 |
+| clinvar_imputed.csv | 29316 | 950 | 15193 | 0 |
+| ESP6500.vcf.gz | 34608 | 5 | 18852 | 0 |
+| ESP6500S1.V2.MAF5.anno_all.tsv.gz | 34610 | 90 | 18852 | 2 |
+| ESP6500_CADD.tsv.gz | 32093 | 90 | 18852 | 2 |
+| ESP6500_imputed.csv | 32092 | 950 | 18852 | 1 |
 
 Data sets:
   * CADD
