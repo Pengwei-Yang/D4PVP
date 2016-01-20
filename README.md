@@ -102,4 +102,4 @@ Data sets:
 | Data source | File short name | File description | Number of samples | Number of features | File location |
 |---|---|---|---|---|---|
 | ClinVar | clinvar_pathogenic_cadd_annov1 | The original ClinVar pathogenic variant dataset generated and analyzed by the CADD and DANN publications. There are multiple entries for many of the variant positions and there are no protein domain features in this version (CADD v1.0). The file is presumably extracted from the CADD preprocessed files provided on their website, but it was obtained from the DANN website. | 29315 | 90 | data/clinvar_CADD.tsv.gz |
-| ClinVar | clinvar_pathogenic_cadd_annov1_imputed | The processed / imputed file generated from the clinvar_pathogenic_cadd_annov1 file. See clinvar_pathogenic_cadd_annov1 file description for the source of this data. | 29315 | 949 | data/clinvar_imputed.csv |
+| ClinVar | clinvar_pathogenic_cadd_annov1_imputed | The processed / imputed file generated from the clinvar_pathogenic_cadd_annov1 file. Use this file for modeling. See clinvar_pathogenic_cadd_annov1 file description for the source of this data. | 29315 | 949 | data/clinvar_imputed.csv |
