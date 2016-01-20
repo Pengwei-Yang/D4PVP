@@ -98,8 +98,8 @@ If you recall the dataset that was available on the publication website in numpy
 The best source of the ClinVar-ESP dataset in its (semi) original form as provided by the DANN author(s) are in the files clinvar_CADD.tsv.gz and ESP6500_CADD.tsv.gz. The "imputed" feature files (clinvar_imputed.csv and ESP6500_imputed.csv) represent what was originally done to format the original CADD v1.0 feature set to input into a model. These contain 61406 total variants (29315 pathogenic and 32091 benign variants) and 949 expanded features.
 
 Data sets:
-  * CADD
-    * Testing and training - 
-  * DANN
-    * ClinVar-ESP testing dataset
-
+| Data source | File short name | File description | Number of samples | Number of features | File location |
+|---|---|---|---|---|---|
+| ClinVar | clinvar_pathogenic_cadd_annov1 | The original ClinVar pathogenic variant dataset generated and analyzed by the CADD and DANN publications. There are multiple entries for many of the variant positions and there are no protein domain features in this version (CADD v1.0). The file is presumably extracted from the CADD preprocessed files provided on their website, but it was obtained from the DANN website. | 29315 | 90 | data/clinvar_CADD.tsv.gz |
+| ClinVar | clinvar_pathogenic_cadd_annov1_imputed | The processed / imputed file generated from the clinvar_pathogenic_cadd_annov1 file. See clinvar_pathogenic_cadd_annov1 file description for the source of this data. | 29315 | 949 | data/clinvar_imputed.csv |
+|   |   |   |   |   |   |
