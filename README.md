@@ -68,6 +68,28 @@ According the README in the DeepCADD directory here is how the datasets were for
 > cat ESP6500_CADD.tsv | python impute_mod.py | python impute2csv_mod.py > ESP6500_imputed.csv
 > python csv2svmlight.py  
 > ```
+
+This is great; however, it is still unclear as to where the two initial files originated (ESP6500SI.V2.MAF5.anno_all.tsv and clinvar_20140303_pathogenic.anno_all.tsv), and is further confused by the fact that these files contain the same columns as the "annotated CADD" files (clinvar_CADD.tsv and ESP6500_CADD.tsv). It seems likely that these two initial files were originally pulled from the CADD data files in some manner that is not fully documented. Nonethless, when you look at the contents of the .tsv files here is the summary:
+  1. clinvar.vcf.gz - 29477 rows with 15202 unique genomic positions (no header) 
+  2. clinvar_20140303_pathogenic.anno_all.tsv.gz - 29479 rows with 15202 unique genomic positions (two header rows)
+  3. clinvar_CADD.tsv.gz - 29317 rows with 15193 unique genomic positions (two header rows)
+  4. clinvar_imputed.csv - 29316 rows with 15193 unique genomic positions (one header row)
+  5. ESP6500.vcf.gz - 34608 rows with 18852 unique genomic positions (no header)
+  6. ESP6500S1.V2.MAF5.anno_all.tsv.gz - 34610 rows with 18852 unique genomic positions (two header rows)
+  7. ESP6500_CADD.tsv.gz - 32093 rows with 18852 unique genomic positions (two header rows)
+  8. ESP6500_imputed.csv - 32092 rows with 18852 unique genomic positions (one header row)
+
+|file name   | Number of rows   | Number of columns   | Number of unique genomic positions   | Number of header rows   |
+|---|---|---|---|---|
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+
 Data sets:
   * CADD
     * Testing and training - 
