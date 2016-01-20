@@ -1,14 +1,20 @@
 # PVP
 
-CADD
+## CADD
+
+Data and documentation sources:
+  * [A general framework for estimating the relative pathogenicity of human genetic variants.](http://www.ncbi.nlm.nih.gov/pubmed/24487276)
+  * Publication [website](cadd.gs.washington.edu)
+  * Data storage website [here](http://krishna.gs.washington.edu/download/CADD/) and [here](http://krishna.gs.washington.edu/members/mkircher/download/CADD/).
 
 
 
-## DANN: a deep learning approach for annotating the pathogenicity of genetic variants
+## DANN
 
 DANN aimed to improve upon the CADD pathogenic variant prediction using a "non-linear" modeling approach using neural nets. The same dataset used by CADD was used by DANN for training, validation and testing. They also analyze real data from ClinVar and ESP, similar to the CADD paper.
 
 Data and documentation sources:
+  * [DANN: a deep learning approach for annotating the pathogenicity of genetic variants](http://www.ncbi.nlm.nih.gov/pubmed/25338716)
   * Publication [website](https://cbcl.ics.uci.edu/public_data/DANN/).
   * Github [website](https://github.com/uci-cbcl/DeepCADD)
 
@@ -97,7 +103,11 @@ If you recall the dataset that was available on the publication website in numpy
 
 The best source of the ClinVar-ESP dataset in its (semi) original form as provided by the DANN author(s) are in the files clinvar_CADD.tsv.gz and ESP6500_CADD.tsv.gz. The "imputed" feature files (clinvar_imputed.csv and ESP6500_imputed.csv) represent what was originally done to format the original CADD v1.0 feature set to input into a model. These contain 61406 total variants (29315 pathogenic and 32091 benign variants) and 949 expanded features.
 
-Data sets:
+## SSCM
+
+
+
+## Datasets
 
 | Data source | File short name | File description | Number of samples | Number of features | File location |
 |---|---|---|---|---|---|
