@@ -47,8 +47,8 @@ Missing values in annotations not defined on a subset of variants were set to 0 
 ### Data source 2
 
 A file server specifically linked to the first author. This source contains the updated (CADD v1.3) files, fully annotated testing and training datasets as well as the simulated and observed variant sites in vcf format. The testing and training files available are:
-  * test.csv.gz - File contains the "imputed" data matrix with  rows and  columns. The documentation
-  * train.csv.gz - File contains the "imputed" data matrix with  rows and 103 columns. 
+  * test.csv.gz - File contains the "imputed" data matrix with 350052 rows and 1064 columns. The documentation
+  * train.csv.gz - File contains the "imputed" data matrix with 34693010 rows and 1064 columns. 
   * training_data.tsv.gz - File contains the "non-imputed" data matrix with all the training sites and v1.3 featureset. There are 35043061 rows and 103 columns.
 
 Note that for the response variable, pathogenic or simulated sites were labelled as +1 and the observed or benign variants are labelled as -1.
