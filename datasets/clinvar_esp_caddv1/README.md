@@ -4,10 +4,10 @@ Documentation of the sources and content of the ClinVar-ESP dataset files in thi
 
 | Data source | File short name | File description | Number of samples | Number of features | File location |
 |---|---|---|---|---|---|
-| ClinVar | clinvar_pathogenic_cadd_annov1 | The original ClinVar pathogenic variant dataset generated and analyzed by the CADD and DANN publications (note they sampled from this set of variants). There are multiple entries for many of the variant positions and there are no protein domain features in this version (CADD v1.0). The file is presumably extracted from the CADD preprocessed files provided on their website, but it was obtained from the DANN website. | 29315 | 90 | data/clinvar_CADD.tsv.gz |
-| ClinVar | clinvar_pathogenic_cadd_annov1_imputed | The processed / imputed file generated from the clinvar_pathogenic_cadd_annov1 file. See CADD notes above and/or CADD publication supplementary information as to how the missing data was imputed and categorical variables were expanded in to N-binary variables. The scripts to perform the formatting are available in scripts/imput_mod.py and scripts/impute2csv_mod.py. This file is ready to input modeling. See clinvar_pathogenic_cadd_annov1 file description for the source of this data. | 29315 | 949 | data/clinvar_imputed.csv |
-| ESP | esp_benign_cadd_annov1 | The original ESP benign variant dataset generated and analyzed by CADD and DANN publications. There are multiple entries for many of the variant positions and there are no protein domain features in this version (CADD v1.0). The file is presumably extracted from the CADD preprocessed files provided on their website, but it was obtained from the DANN website. | 32091 | 90 | data/ESP6500_CADD.tsv.gz |
-| ESP | esp_benign_cadd_annov1_imputed | The processed / imputed file generated from the esp_benign_cadd_annov1 file. See CADD notes above and/or CADD publication supplementary information as to how the missing data was imputed and categorical variables were expanded in to N-binary variables. The scripts to perform the formatting are available in scripts/cadd_annofeatures_impute.py and scripts/cadd_annofeatures_impute2csv.py. This file is ready to input modeling. See esp_benign_cadd_annov1 file description for the source of this data. | 32091 | 949 | data/ESP6500_imputed.csv |
+| ClinVar | clinvar_pathogenic_cadd_annov1 | The original ClinVar pathogenic variant dataset generated and analyzed by the CADD and DANN publications (note they sampled from this set of variants). There are multiple entries for many of the variant positions and there are no protein domain features in this version (CADD v1.0). The file is presumably extracted from the CADD preprocessed files provided on their website, but it was obtained from the DANN website. | 29315 | 90 | clinvar_CADD.tsv.gz |
+| ClinVar | clinvar_pathogenic_cadd_annov1_imputed | The processed / imputed file generated from the clinvar_pathogenic_cadd_annov1 file. See CADD notes above and/or CADD publication supplementary information as to how the missing data was imputed and categorical variables were expanded in to N-binary variables. The scripts to perform the formatting are available in scripts/imput_mod.py and scripts/impute2csv_mod.py. This file is ready to input modeling. See clinvar_pathogenic_cadd_annov1 file description for the source of this data. | 29315 | 949 | clinvar_imputed.csv |
+| ESP | esp_benign_cadd_annov1 | The original ESP benign variant dataset generated and analyzed by CADD and DANN publications. There are multiple entries for many of the variant positions and there are no protein domain features in this version (CADD v1.0). The file is presumably extracted from the CADD preprocessed files provided on their website, but it was obtained from the DANN website. | 32091 | 90 | ESP6500_CADD.tsv.gz |
+| ESP | esp_benign_cadd_annov1_imputed | The processed / imputed file generated from the esp_benign_cadd_annov1 file. See CADD notes above and/or CADD publication supplementary information as to how the missing data was imputed and categorical variables were expanded in to N-binary variables. The scripts to perform the formatting are available in cadd_annofeatures_impute.py and cadd_annofeatures_impute2csv.py. This file is ready to input modeling. See esp_benign_cadd_annov1 file description for the source of this data. | 32091 | 949 | ESP6500_imputed.csv |
 
 ## Data source and documentation
 
@@ -17,7 +17,7 @@ There are two sources for the data files in this repository, which had presumabl
   * DANN publication [website](https://cbcl.ics.uci.edu/public_data/DANN/).
   * DANN github [website](https://github.com/uci-cbcl/DeepCADD)
 
-### Publication website datasets
+### DANN publication website datasets
 
 After reading the DANN paper and analyzing the publication website it was still unclear as to whether the data used for the reported analysis for available for use in either of the identified data sources. I will try to lay out all the convolutions and my conclusions to moving forward. First, the DANN publication cites the use of 10,000 pathogenic and benign variants each for their ROC curve. The publication website contains multiple datasets from the publication:
   1. testing.X.npz, testing.svmlight.gz, testing.y.npy
@@ -47,7 +47,7 @@ xDense.shape
 
 After loading the numpy datasets in python, it is clear that the number of features (n=949) matches the number reported from the CADD paper (after expanding the categorical variables and imputing - see above). The number of rows in the matrix is a bit confusing since you would expect 20,000 rows as cited by the paper from their analysis (n_clinvar = 10,000 and n_esp = 10,000). Since the data had been encoded in numpy format there is not meta-information, like a header, for these datasets, and the data has been expanded into numerical values for input into the model already. To try to resolve what exactly was in this dataset, I sought to compare it to the data available on the github website.
 
-### Github website datasets
+### DANN github website datasets
 
 The github page has a nice README on it to go over the models and how to run the code with the datasets. However, the finer details of the origins of the ClinVar and ESP datasets were a bit lost. First there is a Testing directory which contains ESP and ClinVar dataset files, but there is also a Jul2 directory that contains the same ClinVar and ESP dataset files and some imputation scripts. The files available are:
   1. clinvar.vcf.gz
