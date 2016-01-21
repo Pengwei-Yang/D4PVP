@@ -2,6 +2,11 @@
 
 Documentation of the sources and content of the ClinVar-ESP dataset files in this repository.
 
+### Summary of the ClinVar-ESP dataset
+
+The best source of the ClinVar-ESP dataset in its (semi) original form as provided by the DANN author(s) are in the files clinvar_CADD.tsv.gz and ESP6500_CADD.tsv.gz. The "imputed" feature files (clinvar_imputed.csv and ESP6500_imputed.csv) represent what was originally done to format the original CADD v1.0 feature set to input into a model. These contain 61406 total variants (29315 pathogenic and 32091 benign variants) and 949 expanded features. See the data files table below for more details and read through the rest of the document to understand the source of these files.
+
+### Data files
 | Data source | File short name | File description | Number of samples | Number of features | File location |
 |---|---|---|---|---|---|
 | ClinVar | clinvar_pathogenic_cadd_annov1 | The original ClinVar pathogenic variant dataset generated and analyzed by the CADD and DANN publications (note they sampled from this set of variants). There are multiple entries for many of the variant positions and there are no protein domain features in this version (CADD v1.0). The file is presumably extracted from the CADD preprocessed files provided on their website, but it was obtained from the DANN website. | 29315 | 90 | clinvar_CADD.tsv.gz |
@@ -11,7 +16,7 @@ Documentation of the sources and content of the ClinVar-ESP dataset files in thi
 
 ## Data source and documentation
 
-This dataset originated from the [CADD]() publication which had generated it to test their model for determining a scoring metric for the pathogenicity of a given variant. The CADD publication cites using ~8,000 pathogenic and ~8,000 benign variants for their analysis and also selects the benign variants differently by 1) matching consequence to the pathogenic variants and 2 ) matching on consequence and allele frequency distribution. A subsequent publication for a deep learning approach to similarly predict pathogenicity of variants, called [DANN](), used the same training, testing, validation datasets as the CADD analysis. The derivation of the actual data in this repository has mostly come from the DANN authors, but it should be the original data from the CADD publication.
+This dataset originated from the [CADD](https://github.com/ryanabo/D4PVP/blob/master/datasets/cadd/README.md/) publication which had generated it to test their model for determining a scoring metric for the pathogenicity of a given variant. The CADD publication cites using ~8,000 pathogenic and ~8,000 benign variants for their analysis and also selects the benign variants differently by 1) matching consequence to the pathogenic variants and 2 ) matching on consequence and allele frequency distribution. A subsequent publication for a deep learning approach to similarly predict pathogenicity of variants, called [DANN](https://github.com/ryanabo/D4PVP/blob/master/datasets/dann/README.md), used the same training, testing, validation datasets as the CADD analysis. The derivation of the actual data in this repository has mostly come from the DANN authors, but it should be the original data from the CADD publication.
 
 There are two sources for the data files in this repository, which had presumably acquired the data from the CADD author:
   * DANN publication [website](https://cbcl.ics.uci.edu/public_data/DANN/).
@@ -98,6 +103,4 @@ If you recall the dataset that was available on the publication website in numpy
 
   Given this information, there should only be multiple lines for a single variant position if it lands in multiple genes, which is not the case for a majority of the duplicate entries in the files provided on the DANN github website. The only resolution that makes sense is that the raw data files provided by the CADD authors on their [download page](http://cadd.gs.washington.edu/download) were used to extract these variant annotations, since these files contain multiple entries for many genomic positions. This also begs the question whether the CADD and DANN authors used the multi-annotation per variant position files for their model testing or collapsed them down to a single entry per variant position. Based on communication with the DANN first author, Daniel Quanq, the files provided were the data used in the analysis from the paper and 10,000 were sampled from the ClinVar and 10,000 sampled from ESP datasets.
 
-### Summary for DANN ClinVar-ESP dataset
 
-The best source of the ClinVar-ESP dataset in its (semi) original form as provided by the DANN author(s) are in the files clinvar_CADD.tsv.gz and ESP6500_CADD.tsv.gz. The "imputed" feature files (clinvar_imputed.csv and ESP6500_imputed.csv) represent what was originally done to format the original CADD v1.0 feature set to input into a model. These contain 61406 total variants (29315 pathogenic and 32091 benign variants) and 949 expanded features.
