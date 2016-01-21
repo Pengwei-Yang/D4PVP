@@ -2,9 +2,18 @@
 
 Documentation of the sources and content of the ClinVar-ESP dataset files in this repository.
 
+This dataset originated from the [CADD publication (Kircher et al., 2014)](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3992975/), which used it to test their SVM model to discriminate between ClinVar "pathogenic" variants and natural variation variants within ESP6500. See the CADD [documentation](https://github.com/ryanabo/D4PVP/blob/master/datasets/cadd/README.md) for further details. To summarize the initial generation of the dataset, as described from the CADD supplemental material, the ClinVar "pathogenic" variants were extracted (June 16, 2012) and matched with variants from ESP (>=5% allele frequency) in terms of their consequence annotations. An additional dataset was generated where ESP and ClinVar variant frequencies were also matched to three decimal precisions. From all the documentation gathered, the data files in this directory are most likely a superset of the two ClinVar-ESP datasets used in the CADD and DANN publications, which subsampled equal pathogenic and benign variants from them.  
+
 ### Summary of the ClinVar-ESP dataset
 
 The best source of the ClinVar-ESP dataset in its (semi) original form as provided by the DANN author(s) are in the files clinvar_CADD.tsv.gz and ESP6500_CADD.tsv.gz. The "imputed" feature files (clinvar_imputed.csv and ESP6500_imputed.csv) represent what was originally done to format the original CADD v1.0 feature set to input into a model. To further understand the "imputation" and data preprocessing see [here](https://github.com/ryanabo/D4PVP/blob/master/datasets/cadd/README.md) and look at the two python scripts in this directory (cadd_annofeatures_impute.py and cadd_annofeatures_impute2csv.py). These imputed files contain 61406 total variants (29315 pathogenic and 32091 benign variants) and 949 expanded features. See the data files table below for more details and read through the rest of the document to understand the source of these files.
+
+Additional points to consider:
+  * There are no protein domains in this annotation set (CADDv1).
+  * The provided imputation scripts are designed for CADDv1 annotation features.
+  * CADD and DANN only reportedly used 8k/8k and 10k/10k pathogenic/benign variants, respectively, in their analyses.
+  * It is unclear if the benign variants are selected to match the consequence of the pathogenic variants.
+  * It is unclear what the specific selection criteria was for the ClinVar pathogenic variants. Was review status considered, or were there conflicts in report status at all?
 
 ### Data files
 | Data source | File name | File description | Number of samples | Number of features | File location |
