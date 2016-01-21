@@ -1,16 +1,8 @@
-# DANN
+# SSCM
 
-DANN is a method
-
-## Model
 
 ## Links and data sources:
-  * [Publication]()
-  * DANN publication [website](https://cbcl.ics.uci.edu/public_data/DANN/)
-  * DANN github [website](https://github.com/uci-cbcl/DeepCADD)
-
-## 
-
-### ClinVar-ESP dataset
-
+  * [Publication](http://www.biorxiv.org/content/early/2015/06/26/021527)
+  * SSCM github [website](https://github.com/counsyl/sscm)
+  # SSCM [data](https://zenodo.org/record/31588/files/sscm_data.tar.xz)
 
