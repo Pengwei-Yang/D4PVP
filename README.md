@@ -2,7 +2,7 @@
 
 A couple of methods have recently been published aiming to provide metrics or predictions to determine the pathogenicity of genomic mutations. This repository contains documentation of the available datasets from these published methods and scripts to help obtain the data and code (if available) to recreate the previous analyses.
 
-From a brief overview of a few current methods and the datasetis used for training and testing, it appears there are a lot of hanging questions and niches to fill.
+From a brief overview of a few current methods and the datasets used for training and testing, it appears there are a lot of hanging questions and niches to fill.
   * Should one record per variant site/location be used in training and testing or should there be a record per variant site and transcript annotation?
   * Which features should be used and how to format the values?
   * What programmatic way can features be added and formatted?
