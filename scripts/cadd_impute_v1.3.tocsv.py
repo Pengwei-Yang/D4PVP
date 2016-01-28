@@ -248,6 +248,9 @@ else:
 for line in sys.stdin:
     countlines += 1
     fields = line.rstrip().split('\t')
+    # print fields
+    if line.startswith('#') or line.startswith('y'):
+        # print len(fields)
     if line.startswith('#') or line.startswith('y'):
         if len(fields) != len(transform):
             sys.stderr.write('Unexpected number of fields in line %d: T:%d F:%d\n' % (countlines, len(transform), len(fields)))

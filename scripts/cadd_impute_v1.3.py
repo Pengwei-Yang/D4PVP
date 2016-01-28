@@ -308,6 +308,10 @@ def process_line(options, line, dataStore):
             fields[indices['ctype']] = "DEL"
         elif "DEL" == fields[indices['ctype']]:
             fields[indices['ctype']] = "INS"
+    if len(fields[indices['ref']]) > 1 and fields[indices['ctype']] == "SNV":
+        fields[indices['ctype']] = "DEL"
+    if len(fields[indices['alt']]) > 1 and fields[indices['ctype']] == "SNV":
+        fields[indices['ctype']] = "INS"
     vtype = fields[indices['ctype']]
     skip = False
 
@@ -316,17 +320,30 @@ def process_line(options, line, dataStore):
         if fields[ind] != "NA":
             if name == "Ref": 
                 Ref = fields[ind]
+<<<<<<< HEAD
+                if (Ref == "-") or (vtype != "SNV") or (len(Ref) > 1): 
+=======
                 if (Ref == "-") or (vtype != "SNV"): 
+>>>>>>> e8409ce35aa1724118aa834f2bb9bfc8c232fb68
                     Ref = "N"
                     fields[ind] = Ref
             elif name == "Alt": 
                 Alt = fields[ind]
+<<<<<<< HEAD
+                if (Alt == "-") or (vtype != "SNV") or (len(Alt) > 1): 
+                    Alt = "N"
+                    fields[ind] = Alt
+            elif (name == "oAA") and (vtype != "SNV") or (len(fields[indices['ref']]) > 1) or (len(fields[indices['alt']]) > 1): 
+                fields[ind] = "UD"
+            elif (name == "nAA") and (vtype != "SNV") or (len(fields[indices['ref']]) > 1) or (len(fields[indices['alt']]) > 1): 
+=======
                 if (Alt == "-") or (vtype != "SNV"): 
                     Alt = "N"
                     fields[ind] = Alt
             elif (name == "oAA") and (vtype != "SNV"): 
                 fields[ind] = "UD"
             elif (name == "nAA") and (vtype != "SNV"): 
+>>>>>>> e8409ce35aa1724118aa834f2bb9bfc8c232fb68
                 fields[ind] = "UD"
             elif name == "Length":
                 if int(fields[ind]) >= 50: 
