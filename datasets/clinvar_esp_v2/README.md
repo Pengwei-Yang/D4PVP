@@ -42,7 +42,7 @@ dev.off()
 rr <- r[which(min.af.cols > 0.05), ]
 print(nrow(rr)) # 10552 values left
 
-# Sample 2853 from 10552
+Sample 2853 from 10552
 rsample <- rr[sample(seq(1,nrow(rr)),2853), ]
 
 write.table(rsample, file="ESP6500_clinvar_set3_match.rsample.tsv", sep="\t", quote=F, col.names=F, row.names=F)
